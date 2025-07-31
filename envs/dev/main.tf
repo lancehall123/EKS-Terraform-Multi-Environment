@@ -13,7 +13,7 @@ module "iam_role_cluster" {
   role_name = "EKSClusterRole"
   tags = {
     Name        = "eks-cluster-role"
-    Environment = var.env
+    Environment = "dev"
   }
 }
 
