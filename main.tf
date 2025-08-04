@@ -3,22 +3,22 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "../../modules/vpc"
+  source = "./modules/vpc"
   name   = var.cluster_name
   cidr   = "10.0.0.0/16"
 }
 
 module "iam_role_cluster" {
-  source    = "../../modules/iam-role-cluster"
+  source    = "./modules/iam-role-cluster"
   role_name = "EKSClusterRole"
   tags = {
     Name        = "eks-cluster-role"
-    Environment = var.env
+    Environment = "dev"
   }
 }
 
 module "eks_cluster" {
-  source           = "../../modules/eks_cluster"
+  source           = "./modules/eks_cluster"
   region           = var.region
   cluster_name     = var.cluster_name
   vpc_id           = module.vpc.vpc_id
@@ -27,7 +27,7 @@ module "eks_cluster" {
 }
 
 module "iam_role_node_group" {
-  source    = "../../modules/iam-role-node-group"
+  source    = "./modules/iam-role-node-group"
   role_name = "EKSNodeGroupRole"
   tags = {
     Name        = "eks-node-group-role"
@@ -36,7 +36,7 @@ module "iam_role_node_group" {
 }
 
 module "eks_node_group" {
-  source           = "../../modules/eks_node_group"
+  source           = "./modules/eks_node_group"
   cluster_name     = var.cluster_name
   subnet_ids       = module.vpc.public_subnets
   node_group_name  = var.node_group_name
@@ -47,7 +47,7 @@ module "eks_node_group" {
   node_role_arn    = module.iam_role_node_group.iam_role_arn
 }
 module "remote_state" {
-  source      = "../../modules/remote_state"
+  source      = "./modules/remote_state"
   bucket_name = "terraform-eks-state-lance"
   tags = {
     Name        = "terraform-state"
