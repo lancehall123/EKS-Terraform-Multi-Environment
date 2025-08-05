@@ -16,7 +16,7 @@ variable "cluster_name" {
 variable "env" {
   type        = string
   description = "The environment name (dev, stage, prod)"
-  default     = terraform.workspace
+  default     = "dev"
 }
 
 locals {
