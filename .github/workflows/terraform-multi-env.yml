@@ -41,9 +41,7 @@ jobs:
 
       - name: Select workspace (or create if it doesn't exist)
         run: |
-          terraform workspace list | grep -q "${TF_WORKSPACE}" \
-            && terraform workspace select "${TF_WORKSPACE}" \
-            || terraform workspace new "${TF_WORKSPACE}"
+          terraform workspace list | grep -q "${TF_WORKSPACE}"
 
       - name: Terraform Plan
         run: terraform plan -no-color
