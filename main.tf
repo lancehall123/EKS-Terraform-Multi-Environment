@@ -52,9 +52,9 @@ module "eks_node_group" {
   subnet_ids       = module.vpc.public_subnets
   node_group_name  = var.node_group_name
   instance_types   = var.instance_types
-  desired_capacity = var.desired_capacity
-  min_size         = var.min_size
-  max_size         = var.max_size
+  desired_capacity = local.settings.desired_capacity
+  min_size         = local.settings.var.min_size
+  max_size         = local.settings.var.max_size
   node_role_arn    = module.iam_role_node_group.iam_role_arn
 }
 
