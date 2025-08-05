@@ -1,12 +1,14 @@
-variable "region" {}
+variable "region" {
+  type        = string
+  description = "AWS region"
+  default     = "eu-west-1"
+}
 variable "node_group_name" {
   type = string
   description = "Node group name"
   default = "practice-node-group"
 }
-variable "instance_types" {
-  type = list(string)
-}
+
 variable "cluster_name" {
   type        = string
   description = "EKS cluster name"
