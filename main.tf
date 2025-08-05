@@ -2,6 +2,17 @@ provider "aws" {
   region = var.region
 }
 
+provider "kubernetes" {
+  config_path = "~/.kube/config"
+}
+
+provider "helm" {
+  kubernetes = {
+    config_path = "~/.kube/config"
+  }
+}
+
+
 module "vpc" {
   source = "./modules/vpc"
   name   = var.cluster_name
@@ -46,6 +57,7 @@ module "eks_node_group" {
   max_size         = var.max_size
   node_role_arn    = module.iam_role_node_group.iam_role_arn
 }
+
 module "remote_state" {
   source      = "./modules/remote_state"
   bucket_name = "terraform-eks-state-lance"
@@ -54,3 +66,8 @@ module "remote_state" {
     Environment = var.env
   }
 }
+
+module "prometheus" {
+  source = "./modules/monitoring/prometheus"
+}
+
