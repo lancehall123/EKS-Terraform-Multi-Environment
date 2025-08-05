@@ -4,9 +4,7 @@ variable "node_group_name" {
   description = "Node group name"
   default = "practice-node-group"
 }
-variable "instance_types" {
-  type = list(string)
-}
+
 variable "cluster_name" {
   type        = string
   description = "EKS cluster name"
