@@ -51,7 +51,7 @@ module "eks_node_group" {
   cluster_name     = var.cluster_name
   subnet_ids       = module.vpc.public_subnets
   node_group_name  = var.node_group_name
-  instance_types   = var.instance_types
+  instance_types   = local.settings.instance_types
   desired_capacity = local.settings.desired_capacity
   min_size         = local.settings.var.min_size
   max_size         = local.settings.var.max_size
