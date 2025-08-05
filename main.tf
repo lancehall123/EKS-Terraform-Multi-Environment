@@ -53,8 +53,8 @@ module "eks_node_group" {
   node_group_name  = var.node_group_name
   instance_types   = local.settings.instance_types
   desired_capacity = local.settings.desired_capacity
-  min_size         = local.settings.var.min_size
-  max_size         = local.settings.var.max_size
+  min_size         = local.settings.min_size
+  max_size         = local.settings.max_size
   node_role_arn    = module.iam_role_node_group.iam_role_arn
 }
 
